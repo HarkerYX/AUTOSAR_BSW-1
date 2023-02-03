@@ -3,6 +3,8 @@
 ### INTRODUCTION
 The main purpose of this project is to implement CLASSIC AUTOSAR BSW STACK.
 
+Nice docs, notes and pictures provided. 
+
 ### WORKING TARGET NOW
 #### CAN communication stack
 1. CanIf (WORKING)
