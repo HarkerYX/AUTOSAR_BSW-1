@@ -15,4 +15,5 @@ add_executable(AUTOSAR_LIB main.c
         CanTrv/inc/CanTrcv.h
         CanTrv/src/CanTrcv.c
         CanTrv/inc/CanTrcv.h
-        SchM/inc/SchM_CanTrcv.h)
+        SchM/inc/SchM_CanTrcv.h
+        Can/inc/Can.h SchM/inc/SchM_Can.h)

@@ -15,7 +15,7 @@
 *                                                   Includes                                                           *
 ***********************************************************************************************************************/
 #include "../Platform/x86/Platform_Types.h"
-
+#include "../../ComStack_Types/ComStackTypes.h"
 /***********************************************************************************************************************
 *                                               Type definitions                                                       *
 ***********************************************************************************************************************/
@@ -63,5 +63,12 @@ typedef struct {
     Can_HwHandleType Hoh;
     uint8            ControllerId;
 } Can_HwType;
+
+typedef struct {
+    PduIdType  swPduHandle;
+    uint8      length;
+    Can_IdType id;
+    uint8      *sdu;
+} Can_PduType;
 
 #endif //AUTOSAR_LIB_CAN_GENERALTYPES_H
