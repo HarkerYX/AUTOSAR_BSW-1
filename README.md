@@ -3,6 +3,8 @@
 ### INTRODUCTION
 The main purpose of this project is to implement CLASSIC AUTOSAR BSW STACK.
 
+Simple and directly.
+
 Nice docs, notes and pictures provided. 
 
 ### WORKING TARGET NOW
