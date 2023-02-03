@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
  *
- * Module:       ComStack Types
+ * Module:       EcuM
  *
- * File Name:    ComStackTypes.h
+ * File Name:    EcuM.h
  *
  * Author:       yiyang.cai@pm.me
  *
@@ -10,29 +10,17 @@
  *
  **********************************************************************************************************************/
 
-#ifndef AUTOSAR_LIB_COMSTACKTYPES_H
-#define AUTOSAR_LIB_COMSTACKTYPES_H
+#ifndef AUTOSAR_LIB_ECUM_H
+#define AUTOSAR_LIB_ECUM_H
+
 /***********************************************************************************************************************
 *                                                   Includes                                                           *
 ***********************************************************************************************************************/
-#include "../Std_Types//StandardTypes.h"
+#include "../Platform/x86/Platform_Types.h"
 
 /***********************************************************************************************************************
 *                                               Type definitions                                                       *
 ***********************************************************************************************************************/
-typedef uint16 PduIdType;
-typedef uint16 PduLengthType;
-typedef uint8  IcomConfigIdType;
+typedef uint32 EcuM_WakeupSourceType;
 
-typedef struct {
-    uint8         *SduDataPtr;
-    uint8         *MetaDataPtr;
-    PduLengthType SduLength;
-} PduInfoType;
-
-typedef enum {
-    ICOM_SWITCH_E_OK     = 0x00,
-    ICOM_SWITCH_E_FAILED = 0x01,
-} IcomSwitch_ErrorType;
-
-#endif //AUTOSAR_LIB_COMSTACKTYPES_H
+#endif //AUTOSAR_LIB_ECUM_H

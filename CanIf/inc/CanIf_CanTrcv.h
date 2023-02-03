@@ -1,38 +1,30 @@
 /***********************************************************************************************************************
  *
- * Module:       ComStack Types
+ * Module:       CanIf
  *
- * File Name:    ComStackTypes.h
+ * File Name:    CanIf_CanTrcv.h
  *
  * Author:       yiyang.cai@pm.me
  *
  * Description:  AUTOSAR_SWS_CANInterface 4.4
  *
  **********************************************************************************************************************/
-
-#ifndef AUTOSAR_LIB_COMSTACKTYPES_H
-#define AUTOSAR_LIB_COMSTACKTYPES_H
+#ifndef AUTOSAR_LIB_CANIF_CANTRCV_H
+#define AUTOSAR_LIB_CANIF_CANTRCV_H
 /***********************************************************************************************************************
 *                                                   Includes                                                           *
 ***********************************************************************************************************************/
-#include "../Std_Types//StandardTypes.h"
+#include "CanIf.h"
 
 /***********************************************************************************************************************
-*                                               Type definitions                                                       *
+*                                                Callback Functions                                                    *
 ***********************************************************************************************************************/
-typedef uint16 PduIdType;
-typedef uint16 PduLengthType;
-typedef uint8  IcomConfigIdType;
+void CanIf_ConfirmPnAvailability(uint8 TransceiverId);
 
-typedef struct {
-    uint8         *SduDataPtr;
-    uint8         *MetaDataPtr;
-    PduLengthType SduLength;
-} PduInfoType;
+void CanIf_ClearTrcvWufFlagIndication(uint8 TransceiverId);
 
-typedef enum {
-    ICOM_SWITCH_E_OK     = 0x00,
-    ICOM_SWITCH_E_FAILED = 0x01,
-} IcomSwitch_ErrorType;
+void CanIf_CheckTrcvWakeFlagIndication(uint8 TransceiverId);
 
-#endif //AUTOSAR_LIB_COMSTACKTYPES_H
+void CanIf_TrcvModeIndication(uint8 TransceiverId, CanTrcv_TrcvModeType TransceiverMode);
+
+#endif //AUTOSAR_LIB_CANIF_CANTRCV_H

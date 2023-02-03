@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
  *
- * Module:       ComStack Types
+ * Module:       CanIf
  *
- * File Name:    ComStackTypes.h
+ * File Name:    CanIf_Can.h
  *
  * Author:       yiyang.cai@pm.me
  *
@@ -10,29 +10,24 @@
  *
  **********************************************************************************************************************/
 
-#ifndef AUTOSAR_LIB_COMSTACKTYPES_H
-#define AUTOSAR_LIB_COMSTACKTYPES_H
+#ifndef AUTOSAR_LIB_CANIF_CAN_H
+#define AUTOSAR_LIB_CANIF_CAN_H
 /***********************************************************************************************************************
 *                                                   Includes                                                           *
 ***********************************************************************************************************************/
-#include "../Std_Types//StandardTypes.h"
+#include "CanIf.h"
 
 /***********************************************************************************************************************
-*                                               Type definitions                                                       *
+*                                                Callback Functions                                                    *
 ***********************************************************************************************************************/
-typedef uint16 PduIdType;
-typedef uint16 PduLengthType;
-typedef uint8  IcomConfigIdType;
+void CanIf_TxConfirmation(PduIdType CanTxPduId);
 
-typedef struct {
-    uint8         *SduDataPtr;
-    uint8         *MetaDataPtr;
-    PduLengthType SduLength;
-} PduInfoType;
+void CanIf_RxIndication(const Can_HwType *Mailbox, const PduInfoType *PduInfoPtr);
 
-typedef enum {
-    ICOM_SWITCH_E_OK     = 0x00,
-    ICOM_SWITCH_E_FAILED = 0x01,
-} IcomSwitch_ErrorType;
+void CanIf_ControllerBusOFF(uint8 ControllerId);
 
-#endif //AUTOSAR_LIB_COMSTACKTYPES_H
+void CanIf_ControllerModeIndication(uint8 ControllerId, Can_ControllerStateType ControllerMode);
+
+void CanIf_CurrentIcomConfiguration(uint8 ControllerId, IcomConfigIdType ConfigurationId, IcomSwitch_ErrorType Error);
+
+#endif //AUTOSAR_LIB_CANIF_CAN_H
