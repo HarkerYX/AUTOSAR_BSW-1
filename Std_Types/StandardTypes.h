@@ -21,4 +21,13 @@
 ***********************************************************************************************************************/
 typedef uint8 Std_ReturnType;
 
+typedef struct
+{
+    uint16  vendorID;
+    uint16  moduleID;
+    uint8   sw_major_version;
+    uint8   sw_minor_version;
+    uint8   sw_patch_version;
+} Std_VersionInfoType;
+
 #endif //AUTOSAR_LIB_STANDARDTYPES_H

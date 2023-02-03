@@ -11,4 +11,8 @@ add_executable(AUTOSAR_LIB main.c
         ComStack_Types/ComStackTypes.h
         EcuM/EcuM.h
         CanIf/inc/CanIf_Can.h
-        CanIf/inc/CanIf_CanTrcv.h)
+        CanIf/inc/CanIf_CanTrcv.h
+        CanTrv/inc/CanTrcv.h
+        CanTrv/src/CanTrcv.c
+        CanTrv/inc/CanTrcv.h
+        SchM/inc/SchM_CanTrcv.h)
