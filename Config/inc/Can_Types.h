@@ -2,7 +2,7 @@
  *
  * Module:       Static Config
  *
- * File Name:    CanIf_PbCfg.h
+ * File Name:    Can_Types.h
  *
  * Author:       yiyang.cai@pm.me
  *
@@ -10,8 +10,8 @@
  *
  **********************************************************************************************************************/
 
-#ifndef AUTOSAR_LIB_CANIF_PBCFG_H
-#define AUTOSAR_LIB_CANIF_PBCFG_H
+#ifndef AUTOSAR_LIB_CAN_TYPES_H
+#define AUTOSAR_LIB_CAN_TYPES_H
 /***********************************************************************************************************************
 *                                                   Includes                                                           *
 ***********************************************************************************************************************/
@@ -19,45 +19,38 @@
 #include "../../Can_GeneralTypes/Can_GeneralTypes.h"
 #include "../../ComStack_Types/ComStackTypes.h"
 #include "../../EcuM/EcuM.h"
-#include "../../Config/inc/CanDrv_PbCfg.h"
-#include "../../Config/inc/Can_Types.h"
+
 /***********************************************************************************************************************
 *                                               Type definitions                                                       *
 ***********************************************************************************************************************/
+typedef enum {
+    BASIC = 0x00,
+    FULL  = 0x01,
+} Can_Handle_Type_Enum;
 
+typedef enum {
+    CAN_ID_EXTENDED = 0x00,
+    CAN_ID_MIXED    = 0x01,
+    CAN_ID_STANDARD = 0x02,
+} Can_Id_Type_Enum;
 
-typedef struct {
+typedef enum {
+    RECEIVE  = 0x00,
+    TRANSMIT = 0x01,
+} Can_Object_Type_Enum;
 
-} CanIf_Ctrl_Cfg;
+typedef enum {
+    CAN_MODE_INTERRUPT = 0x00,
+    CAN_MODE_POLLING   = 0x01,
+    CAN_MODE_MIXED     = 0x02,
+} Can_Opertaion_Mode_Enum;
 
-typedef struct {
-    uint32 CanIf_Hrh_Range_Base_Id;
-    uint32 CanIf_Hrh_Range_Mask;
-    uint32 CanIf_Hrh_Range_Rx_Pdu_Lower_CanId;
-    Can_Id_Type_Enum CanIf_Hrh_Range_Rx_Pdu_Range_CanId_Type;
-    uint32 CanIf_Hrh_Range_Rx_Pdu_Upper_CanId;
-} CanIf_Hrh_Range_Cfg;
+typedef enum {
+    AND     = 0x00,
+    EQUAL   = 0x01,
+    GREATER = 0x02,
+    SMLLER  = 0x03,
+    XOR     = 0x04,
+} Can_Compare_Enum;
 
-typedef struct {
-    boolean             CanIf_Hrh_Software_Filter;
-    CanIf_Ctrl_Cfg      CanIf_Hrh_Can_Ctrl_Id_Ref;
-    Can_Hardware_Object CanIf_Hrh_Id_Sym_Ref;
-    CanIf_Hrh_Range_Cfg CanIf_Hrh_Range_Cfg_Impl;
-} CanIf_Hrh_Config;
-
-typedef struct {
-    CanIf_Hrh_Config
-    CanIf_Hth_Config
-} CanIf_Init_Hoh_Config;
-
-typedef struct {
-    CanIf_Init_Config_Set
-    CanIf_Init_Hoh_Config
-    CanIf_RX_Pdu_Config
-    CanIf_TX_Pdu_Config
-    CanIf_Buffer_Config
-    CanIf_Max_Tx_Pdu_Config
-    CanIf_Max_Rx_Pdu_Config
-} CanIf_Init_Config;
-
-#endif //AUTOSAR_LIB_CANIF_PBCFG_H
+#endif //AUTOSAR_LIB_CAN_TYPES_H
