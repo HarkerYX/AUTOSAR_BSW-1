@@ -53,4 +53,28 @@ typedef enum {
     XOR     = 0x04,
 } Can_Compare_Enum;
 
+typedef enum {
+    BINARY = 0x00,
+    INDEX  = 0x01,
+    LINEAR = 0x02,
+    TABLE  = 0x03,
+} Can_SW_Filter_Method_Enum;
+
+typedef enum {
+    UINT16 = 0x00,
+    UINT8  = 0x01,
+} Can_HW_Handle_Type_Enum;
+
+typedef enum {
+    EXTENDED_CAN    = 0x00,
+    EXTENDED_FD_CAN = 0x01,
+    STANDARD_CAN    = 0x02,
+    STANDARD_FD_CAN = 0x03,
+} Can_LPdu_ID_Type_Enum;
+
+typedef enum {
+    DYNAMIC = 0x00,
+    STATIC  = 0x00,
+} CanIf_Tx_Pdu_Type_Enum;
+
 #endif //AUTOSAR_LIB_CAN_TYPES_H
