@@ -23,3 +23,7 @@ static CanIf_Hth_Can_Controller_Config const CanIf_Hth_Can_Controler_Config_Grou
     {12, 0},
     {13, 0},
 };
+
+static CanIf_Hrh_Can_Controller_Config const CanIf_Hrh_Can_Controler_Config_Group_1[1] = {
+    {0, 0}
+};

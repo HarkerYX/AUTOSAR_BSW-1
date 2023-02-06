@@ -28,7 +28,15 @@ typedef struct {
     Can_HwHandleType CanIf_Hth_HW_Id;
 
     /* Actual Can controller Id */
-    uint8            CanIf_Can_Controlelr_Id;
+    uint8            CanIf_Can_Controlellr_Id;
 } CanIf_Hth_Can_Controller_Config;
+
+typedef struct {
+    /* This id is for HrH object in Can controller */
+    Can_HwHandleType CanIf_Hrh_HW_Id;
+
+    /* Actual Can controller Id */
+    uint8            CanIf_Can_Controller_id;
+} CanIf_Hrh_Can_Controller_Config;
 
 #endif //AUTOSAR_LIB_CANIF_LCFG_H
