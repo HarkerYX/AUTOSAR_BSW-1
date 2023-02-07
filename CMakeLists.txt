@@ -26,4 +26,4 @@ add_executable(AUTOSAR_LIB main.c
         Config/src/CanDrv_PbCfg.c
         Config/inc/CanDrv_PbCfg.h
         Config/src/CanDrv_LCfg.c
-        Config/inc/CanDrv_LCfg.h Config/inc/Can_Types.h)
+        Config/inc/CanDrv_LCfg.h Config/inc/Can_Types.h Config/src/CanTrcv_PbCfg.c Config/inc/CanTrcv_PbCfg.h Config/src/CanTrcv_LCfg.c Config/inc/CanTrcv_LCfg.h)

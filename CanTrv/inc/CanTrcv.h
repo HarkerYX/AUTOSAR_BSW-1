@@ -10,7 +10,7 @@
  *
  **********************************************************************************************************************/
 
-#ifndef AUTOSAR_LIB_CANTRCV_H
+#ifndef AUTOSAR_LIB_CANTRCV_PBCFG_H
 #define AUTOSAR_LIB_CANTRCV_H
 /***********************************************************************************************************************
 *                                                   Includes                                                           *
@@ -68,4 +68,4 @@ Std_ReturnType CanTrcv_CheckWakeFlag(uint8 Transceiver);
 
 void CanTrcv_DeInit(void);
 
-#endif //AUTOSAR_LIB_CANTRCV_H
+#endif //AUTOSAR_LIB_CANTRCV_PBCFG_H
