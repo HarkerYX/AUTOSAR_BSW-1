@@ -30,7 +30,7 @@
 typedef struct {
     uint8          CanIf_Ctrl_Id;
     boolean        CanIf_Ctrl_Wakeup_Support;
-    Can_Controller CanIf_Ctrl_Can_Ctrl_Ref;
+    Can_Controller *CanIf_Ctrl_Can_Ctrl_Ref;
 } CanIf_Ctrl_Cfg;
 
 typedef struct {
@@ -91,32 +91,32 @@ typedef struct {
 typedef struct {
     uint8            CanIf_Trcv_Id;
     boolean          CanIf_Trcv_Wakeup_Support;
-    CanTrcv_Channel Can_Trcv_Channel_Ref;
+    CanTrcv_Channel  *Can_Trcv_Channel_Ref;
 } CanIf_Trcv_Cfg;
 
 typedef struct {
-    CanIf_Trcv_Cfg CanIf_Trcv_Cfg_Ref;
+    CanIf_Trcv_Cfg *CanIf_Trcv_Cfg_Ref;
 } CanIf_Trcv_Drv_Cfg;
 
 typedef struct {
     boolean             CanIf_Hrh_Software_Filter;
-    CanIf_Ctrl_Cfg      CanIf_Hrh_Can_Ctrl_Id_Ref;
-    Can_Hardware_Object CanIf_Hrh_Id_Sym_Ref;
+    CanIf_Ctrl_Cfg      *CanIf_Hrh_Can_Ctrl_Id_Ref;
+    Can_Hardware_Object *CanIf_Hrh_Id_Sym_Ref;
 } CanIf_Hrh_Cfg;
 
 typedef struct {
-    CanIf_Ctrl_Cfg      CanIf_Hth_Can_Ctrl_Id_Ref;
-    Can_Hardware_Object CanIf_Hth_Id_Sym_Ref;
+    CanIf_Ctrl_Cfg      *CanIf_Hth_Can_Ctrl_Id_Ref;
+    Can_Hardware_Object *CanIf_Hth_Id_Sym_Ref;
 } CanIf_Hth_Cfg;
 
 typedef struct {
-    CanIf_Hrh_Cfg  CanIf_Hrh_Cfg_Ref;
-    CanIf_Hth_Cfg  CanIf_Hth_Cfg_Ref;
+    CanIf_Hrh_Cfg  *CanIf_Hrh_Cfg_Ref;
+    CanIf_Hth_Cfg  *CanIf_Hth_Cfg_Ref;
 } CanIf_Init_Hoh_Cfg;
 
 typedef struct {
     uint8         CanIfBufferSize;
-    CanIf_Hth_Cfg CanIf_Buffer_Hth_Ref;
+    CanIf_Hth_Cfg *CanIf_Buffer_Hth_Ref;
 } CanIf_Buffer_Cfg;
 
 typedef struct {
@@ -134,10 +134,10 @@ typedef struct {
     boolean                    CanIf_Rx_Pdu_Read_Notify_Status;
     void(*CanIfRxPduUserRxIndicationName)(void);
     void(*CanIfRxPduUserRxIndicationUL)(void);
-    CanIf_Hrh_Cfg              Can_If_Rx_Pdu_Hrh_Id_Ref;
-    uint32                     Can_If_Rx_Pdu_Ref;
-    CanIf_Rx_Pdu_CanId_Range   CanIf_Rx_Pdu_CanId_Range_Ref;
-    uint32                     CanIf_TT_Rx_Frame_Triggering_Ref;
+    CanIf_Hrh_Cfg              *Can_If_Rx_Pdu_Hrh_Id_Ref;
+    uint32                     *Can_If_Rx_Pdu_Ref;
+    CanIf_Rx_Pdu_CanId_Range   *CanIf_Rx_Pdu_CanId_Range_Ref;
+    uint32                     *CanIf_TT_Rx_Frame_Triggering_Ref;
 } CanIf_Rx_Pdu_Cfg;
 
 typedef struct {
@@ -153,32 +153,36 @@ typedef struct {
     void(*CanIfTxPduUserTriggerTransmitName)(void);
     void(*CanIfTxPduUserTxConfirmationName)(void);
     void(*CanIfTxPduUserTxConfirmationUL)(void);
-    CanIf_Buffer_Cfg       CanIf_Buffer_Cfg;
-    uint32                 Can_If_Tx_Pdu_Ref;
+    CanIf_Buffer_Cfg       *CanIf_Buffer_Cfg_Ref;
+    uint32                 *Can_If_Tx_Pdu_Ref;
 } CanIf_Tx_Pdu_Cfg;
 
 typedef struct {
-    CanIf_Init_Hoh_Cfg     CanIf_Ctrl_Drv_Init_Hoh_Config_Ref;
-    Can_General            CanIf_Ctrl_Drv_Name_Ref;
-    CanIf_Ctrl_Cfg         CanIf_Ctrl_Cfg_Ref;
+    CanIf_Init_Hoh_Cfg     *CanIf_Ctrl_Drv_Init_Hoh_Config_Ref;
+    Can_General            *CanIf_Ctrl_Drv_Name_Ref;
+    CanIf_Ctrl_Cfg         *CanIf_Ctrl_Cfg_Ref;
 } CanIf_Ctrl_Drv_Cfg;
 
 typedef struct {
-    uint8                 CanIf_Init_Config_Set;
-    uint64                CanIf_Max_Buffer_Size;
-    uint64                CanIf_Max_Rx_Pdu_Cfg;
-    uint64                CanIf_Max_Tx_Pdu_Cfg;
-    CanIf_Buffer_Cfg      CanIf_Buffer_Cfg_Ref;
-    CanIf_Init_Hoh_Cfg    CanIf_Init_Hoh_Config_Ref;
-    CanIf_Rx_Pdu_Cfg      CanIf_Rx_Pdu_Cfg_Ref;
-    CanIf_Tx_Pdu_Cfg      CanIf_Tx_Pdu_Cfg_Ref;
+    uint8                  CanIf_Init_Config_Set;
+    uint64                 CanIf_Max_Buffer_Size;
+    uint64                 CanIf_Max_Rx_Pdu_Cfg;
+    uint64                 CanIf_Max_Tx_Pdu_Cfg;
+    CanIf_Buffer_Cfg       *CanIf_Buffer_Cfg_Ref;
+    CanIf_Init_Hoh_Cfg     *CanIf_Init_Hoh_Config_Ref;
+    CanIf_Rx_Pdu_Cfg       *CanIf_Rx_Pdu_Cfg_Ref;
+    CanIf_Tx_Pdu_Cfg       *CanIf_Tx_Pdu_Cfg_Ref;
 } CanIf_Init_Config;
 
 typedef struct {
-    CanIf_Ctrl_Drv_Cfg CanIf_Ctrl_Drv_Cfg_Ref;
-    CanIf_Dispatch_Cfg CanIf_Dispatch_Cfg_Ref;
-    CanIf_Private_Cfg  CanIf_Private_Cfg_Ref;
-    CanIf_Trcv_Drv_Cfg CanIf_Trcv_Drv_Cfg_Ref;
+    CanIf_Ctrl_Drv_Cfg     *CanIf_Ctrl_Drv_Cfg_Ref;
+    CanIf_Dispatch_Cfg     *CanIf_Dispatch_Cfg_Ref;
+    CanIf_Private_Cfg      *CanIf_Private_Cfg_Ref;
+    CanIf_Trcv_Drv_Cfg     *CanIf_Trcv_Drv_Cfg_Ref;
 } CanIf;
+/***********************************************************************************************************************
+*                                                     Extern                                                           *
+***********************************************************************************************************************/
+extern CanIf_Tx_Pdu_Cfg CanIf_Tx_Pdu_Cfg_Group[1];
 
 #endif //AUTOSAR_LIB_CANIF_PBCFG_H

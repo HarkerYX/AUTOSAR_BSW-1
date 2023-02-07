@@ -93,4 +93,10 @@ typedef enum {
     CANTRCV_OP_MODE_STANDBY = 0x02,
 } CanTrcv_OP_Mode_Type_Enum;
 
+typedef enum {
+    CAN_OK     = 0x00,
+    CAN_NOT_OK = 0x01,
+    CAN_BUSY   = 0x02,
+} Can_ReturnType;
+
 #endif //AUTOSAR_LIB_CAN_TYPES_H

@@ -53,8 +53,8 @@ typedef struct {
     Can_Opertaion_Mode_Enum        Can_Tx_Processing;
     boolean                        Can_Wakeup_Functionality_API;
     Can_Opertaion_Mode_Enum        Can_Wakeup_Processing;
-    boolean                        CanWakeupSupport;
-    Can_Controller_Baudrate_Config CanControllerDefaultBaudrate;
+    boolean                        Can_Wakeup_Support;
+    Can_Controller_Baudrate_Config *Can_Controller_Default_Baudrate_Ref;
 } Can_Controller;
 
 typedef struct {
@@ -70,8 +70,8 @@ typedef struct {
     uint8                          Can_Object_Id;
     Can_Object_Type_Enum           Can_Object_Type;
     boolean                        Can_Trigger_Transmit_enable;
-    Can_Controller                 Can_Controller_Ref;
-    Can_MainFunction_RW_Period     Can_MainFunction_RW_Period_Ref;
+    Can_Controller                 *Can_Controller_Ref;
+    Can_MainFunction_RW_Period     *Can_MainFunction_RW_Period_Ref;
 } Can_Hardware_Object;
 
 typedef struct {
@@ -103,29 +103,29 @@ typedef struct {
     uint16  Can_Icom_Message_Id_Mask;
     sint32  Can_Icom_Missing_Message_Timer_Value;
     boolean Can_Icom_Payload_Length_Error;
-    Can_Icom_Rx_Message_Signal_Config Can_Icom_Rx_Message_Signal_Config_Ref;
+    Can_Icom_Rx_Message_Signal_Config *Can_Icom_Rx_Message_Signal_Config_Ref;
 } Can_Icom_Rx_Message;
 
 typedef struct {
-    Can_Icom_Rx_Message Can_Icom_Rx_Message_Ref;
+    Can_Icom_Rx_Message *Can_Icom_Rx_Message_Ref;
 } Can_Icom_Wakeup_Causes;
 
 typedef struct {
     uint8                  Can_Icom_Config_Id;
     boolean                Can_Icom_WakeOn_BusOff;
-    Can_Icom_Wakeup_Causes Can_Icom_Wakeup_Causes_Ref;
+    Can_Icom_Wakeup_Causes *Can_Icom_Wakeup_Causes_Ref;
 } Can_Icom;
 
 typedef struct {
-    Can_Controller      Can_Controller_Ref;
-    Can_Hardware_Object Can_Hardware_Object_Ref;
-    Can_Icom            Can_Icom_Ref;
+    Can_Controller      *Can_Controller_Ref;
+    Can_Hardware_Object *Can_Hardware_Object_Ref;
+    Can_Icom            *Can_Icom_Ref;
 } Can_Config_Set;
 
 
 typedef struct {
-    Can_Config_Set  Can_Config_Set_Ref;
-    Can_General     Can_General_Ref;
+    Can_Config_Set  *Can_Config_Set_Ref;
+    Can_General     *Can_General_Ref;
 } Can;
 
 #endif //AUTOSAR_LIB_CANDRV_PBCFG_H

@@ -30,15 +30,15 @@ typedef struct {
 
 typedef struct {
     char  CanTrcv_Hardware_Interface_Name[50];
-    uint8 CanTrcv_Dio_Sym_Name_Ref;
+    uint8 *CanTrcv_Dio_Sym_Name_Ref;
 } CanTrcv_Dio_Channel_Access;
 
 typedef struct {
-    CanTrcv_Spi_Sequence CanTrcv_Spi_Sequence_Ref;
+    CanTrcv_Spi_Sequence *CanTrcv_Spi_Sequence_Ref;
 } CanTrcv_Spi_Access;
 
 typedef struct {
-    CanTrcv_Dio_Channel_Access CanTrcv_Dio_Channel_Access_Ref;
+    CanTrcv_Dio_Channel_Access *CanTrcv_Dio_Channel_Access_Ref;
 } CanTrcv_Dio_Access;
 
 typedef struct {
@@ -55,7 +55,7 @@ typedef struct {
     uint32  CanTrcv_Pn_Frame_CanId_Mask;
     uint8   CanTrcv_Pn_Frame_Dlc;
     boolean CanTrcv_Power_On_Flag;
-    CanTrcv_Pn_Frame_Data_Mask_Spec CanTrcv_Pn_Frame_Data_Mask_Spec_Ref;
+    CanTrcv_Pn_Frame_Data_Mask_Spec *CanTrcv_Pn_Frame_Data_Mask_Spec_Ref;
 } CanTrcv_Partial_Network;
 
 
@@ -64,8 +64,8 @@ typedef struct {
 } CanTrcv_Dem_Event_Parameter_Refs;
 
 typedef struct {
-    CanTrcv_Dio_Access CanTrcv_Dio_Access_Ref;
-    CanTrcv_Spi_Access CanTrcv_Spi_Access_Ref;
+    CanTrcv_Dio_Access *CanTrcv_Dio_Access_Ref;
+    CanTrcv_Spi_Access *CanTrcv_Spi_Access_Ref;
 } CanTrcv_Access;
 
 typedef struct {
@@ -76,15 +76,15 @@ typedef struct {
     CanTrcv_OP_Mode_Type_Enum CanTrcv_Init_State;
     uint16                    CanTrcv_Max_Baudrate;
     boolean                   CanTrcv_Wakeup_By_Bus_Used;
-    CanTrcv_Access            CanTrcv_Access_Ref;
-    CanTrcv_Dem_Event_Parameter_Refs CanTrcv_Dem_Event_Parameter_Refs_Ref;
-    CanTrcv_Partial_Network   CanTrcv_Partial_Network_Ref;
+    CanTrcv_Access            *CanTrcv_Access_Ref;
+    CanTrcv_Dem_Event_Parameter_Refs *CanTrcv_Dem_Event_Parameter_Refs_Ref;
+    CanTrcv_Partial_Network   *CanTrcv_Partial_Network_Ref;
 } CanTrcv_Channel;
 
 typedef struct {
     uint8           CanTrcv_SPI_Comm_Retries;
     uint8           CanTrcv_SPI_Comm_Timeout;
-    CanTrcv_Channel CanTrcv_Channel_Ref;
+    CanTrcv_Channel *CanTrcv_Channel_Ref;
 } CanTrcv_Config_Set;
 
 typedef struct {
@@ -99,8 +99,8 @@ typedef struct {
 } CanTrcv_General;
 
 typedef struct {
-    CanTrcv_Config_Set CanTrcv_Config_Set_Ref;
-    CanTrcv_General    CanTrcv_General_Ref;
+    CanTrcv_Config_Set *CanTrcv_Config_Set_Ref;
+    CanTrcv_General    *CanTrcv_General_Ref;
 } CanTrcv;
 
 #endif //AUTOSAR_LIB_CANTRCV_PBCFG_H
