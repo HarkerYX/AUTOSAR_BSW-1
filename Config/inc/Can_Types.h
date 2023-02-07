@@ -77,4 +77,20 @@ typedef enum {
     STATIC  = 0x00,
 } CanIf_Tx_Pdu_Type_Enum;
 
+typedef enum {
+    NONE            = 0x00,
+    TIMER_1US_16BIT = 0x01,
+} CanTrcv_Timer_Type_Enum;
+
+typedef enum {
+    CANTRCV_WAKEUP_BY_POLLING    = 0x00,
+    CANTRCV_WAKEUP_NOT_SUPPORTED = 0x01,
+} CanTrcv_Wakeup_Type_Enum;
+
+typedef enum {
+    CANTRCV_OP_MODE_NORMAL = 0x00,
+    CANTRCV_OP_MODE_SLEEP  = 0x01,
+    CANTRCV_OP_MODE_STANDBY = 0x02,
+} CanTrcv_OP_Mode_Type_Enum;
+
 #endif //AUTOSAR_LIB_CAN_TYPES_H

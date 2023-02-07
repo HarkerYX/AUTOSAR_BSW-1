@@ -91,7 +91,7 @@ typedef struct {
 typedef struct {
     uint8            CanIf_Trcv_Id;
     boolean          CanIf_Trcv_Wakeup_Support;
-    Can_Trcv_Channel Can_Trcv_Channel_Ref;
+    CanTrcv_Channel Can_Trcv_Channel_Ref;
 } CanIf_Trcv_Cfg;
 
 typedef struct {
