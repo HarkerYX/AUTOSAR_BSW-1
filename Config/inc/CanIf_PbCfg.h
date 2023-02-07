@@ -177,12 +177,15 @@ typedef struct {
 typedef struct {
     CanIf_Ctrl_Drv_Cfg     *CanIf_Ctrl_Drv_Cfg_Ref;
     CanIf_Dispatch_Cfg     *CanIf_Dispatch_Cfg_Ref;
+    CanIf_Init_Config      *CanIf_Init_Config_Ref;
     CanIf_Private_Cfg      *CanIf_Private_Cfg_Ref;
+    CanIf_Public_Cfg       *CanIf_Public_Cfg_Ref;
     CanIf_Trcv_Drv_Cfg     *CanIf_Trcv_Drv_Cfg_Ref;
 } CanIf;
 /***********************************************************************************************************************
 *                                                     Extern                                                           *
 ***********************************************************************************************************************/
-extern CanIf_Tx_Pdu_Cfg CanIf_Tx_Pdu_Cfg_Group[1];
+extern CanIf_Tx_Pdu_Cfg CanIf_Tx_Pdu_Cfg_Group_1[];
 
+extern CanIf CanIf_Group_1[];
 #endif //AUTOSAR_LIB_CANIF_PBCFG_H

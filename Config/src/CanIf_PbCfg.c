@@ -79,7 +79,7 @@ CanIf_Buffer_Cfg CanIf_Buffer_Cfg_Group_1[1] = {
     }
 };
 
-CanIf_Tx_Pdu_Cfg CanIf_Tx_Pdu_Cfg_Group[1] = {
+CanIf_Tx_Pdu_Cfg CanIf_Tx_Pdu_Cfg_Group_1[1] = {
     {
         .CanIf_Tx_Pdu_CanId              = 0x000007D2U,
         .CanIf_Tx_Pdu_CanId_Mask         = 0xFFFFFFFFU,
@@ -92,5 +92,35 @@ CanIf_Tx_Pdu_Cfg CanIf_Tx_Pdu_Cfg_Group[1] = {
         .CanIf_Tx_Pdu_Type               = STATIC,
         .CanIf_Buffer_Cfg_Ref            = &CanIf_Buffer_Cfg_Group_1[0],
     }
+};
+
+CanIf_Public_Cfg CanIf_Public_Cfg_Group_1[1] = {
+    {
+        .CanIf_Bus_Mirroring_Support                = STD_OFF,
+        .CanIf_Dev_Error_Detect                     = STD_OFF,
+        .CanIf_MetaData_Support                     = STD_OFF,
+        .CanIf_Public_Icom_Support                  = STD_OFF,
+        .CanIf_Public_Multiple_Drv_Support          = STD_OFF,
+        .CanIf_Public_Pn_Support                    = STD_OFF,
+        .CanIf_Public_Read_Rx_Pdu_Data_Api          = STD_OFF,
+        .CanIf_Public_Read_Rx_Pdu_Notify_Status_Api = STD_OFF,
+        .CanIf_Public_Read_Tx_Pdu_Notify_Status_Api = STD_OFF,
+        .CanIf_Public_Set_Dynamic_Tx_Id_Api         = STD_OFF,
+        .CanIf_Public_Tx_Buffering                  = STD_OFF,
+        .CanIf_Public_Tx_Confirm_Polling_Support    = STD_OFF,
+        .CanIf_Public_Wakeup_Check_Valid_By_NM      = STD_OFF,
+        .CanIf_Public_Wakeup_Check_Valid_Support    = STD_OFF,
+        .CanIf_Set_Baudrate_Api                     = STD_OFF,
+        .CanIf_Trigger_Transmit_Support             = STD_OFF,
+        .CanIf_Tx_Offline_Active_Support            = STD_OFF,
+        .CanIf_Version_Info_Api                     = STD_OFF,
+        .CanIf_Wakeup_Support                       = STD_OFF,
+    },
+};
+
+CanIf CanIf_Group_1[1] = {
+    {
+        .CanIf_Public_Cfg_Ref = &CanIf_Public_Cfg_Group_1[0],
+    },
 };
 
