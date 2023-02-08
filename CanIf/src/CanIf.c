@@ -29,6 +29,7 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
     CanIf_PduModeType       Pdu_Mode;
     Can_ControllerStateType Controller_Mode;
     boolean                 Do_Transmit = FALSE;
+    boolean                 Can_FD_BIT;
 
     Can_Controller_Id = CanIf_Tx_Pdu_Cfg_Group_1[TxPduId]
         .CanIf_Buffer_Cfg_Ref
@@ -94,6 +95,19 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
             /* SWS_CANIF_00677 */
             Can_Return = E_NOT_OK;
         }
+    }
+
+    /* SWS_CANIF_00893 */
+    if (Can_Return == E_OK) {
+        Can_Pdu.id = CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_CanId;
+        Can_FD_BIT = Can_Pdu.id & 0x40000000;
+        if (   ((PduInfoPtr->SduLength > 64) && (Can_FD_BIT == TRUE))
+            || ((PduInfoPtr->SduLength > 8) && (Can_FD_BIT != TRUE))   )
+        {
+            Can_Return = E_NOT_OK;
+            /* Report to DET */
+        }
+
     }
 
     if ((Can_Return == E_OK) && (Do_Transmit == TRUE)) {
