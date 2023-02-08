@@ -2,7 +2,7 @@
  *
  * Module:       Static Config
  *
- * File Name:    CanTrcv_LCfg.c
+ * File Name:    CanSM_LCfg.c
  *
  * Author:       yiyang.cai@pm.me
  *
@@ -10,4 +10,4 @@
  *
  **********************************************************************************************************************/
 
-#include "../inc/CanTrcv_LCfg.h"
+#include "../inc/CanSM_LCfg.h"
