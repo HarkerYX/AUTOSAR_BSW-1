@@ -138,7 +138,8 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
             Can_Pdu.sdu = PduInfoPtr->SduDataPtr;
         }
 
-
+        Can_Pdu.length = PduInfoPtr->SduLength;
+        Can_Pdu.swPduHandle = TxPduId;
 
     }
 
