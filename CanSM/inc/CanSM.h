@@ -68,6 +68,7 @@ Std_ReturnType CanSM_StopWakeupSource(NetworkHandleType network);
 /* SWS_CanSM_00587 */
 void CanSM_CurrentIcomConfiguration(uint8 ControllerId, IcomConfigIdType ConfigurationId, IcomSwitch_ErrorType Error);
 
+void CanSM_Get_Channel_Config_By_Controller_Id(uint8 *Controller_Id, uint8 *Network, uint8 Transceiver_Id);
 
 
 #endif //AUTOSAR_LIB_CANSM_H
