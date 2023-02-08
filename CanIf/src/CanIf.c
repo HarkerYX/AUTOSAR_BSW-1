@@ -97,10 +97,26 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
         }
     }
 
-    Can_Pdu.id = CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_CanId;
-    Can_FD_BIT = Can_Pdu.id & 0x40000000;
+    /* SWS_CANIF_00844 */
+    if (CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_Type == DYNAMIC) {
+        if ((CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_CanId == 0x00000000)
+         && (CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_CanId_Mask == 0x00000000)) {
+            Can_Pdu.id = *(Can_IdType*)PduInfoPtr->MetaDataPtr;
+        }
+        else {
+            Can_Pdu.id = CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_CanId
+                       & CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_CanId_Mask;
+        }
+    }
+    else {
+        Can_Pdu.id = CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_CanId;
+    }
 
-    if (Can_Return == E_OK) {
+
+    if ((Can_Return == E_OK) && (Do_Transmit == TRUE)) {
+
+        Can_FD_BIT = Can_Pdu.id & 0x40000000;
+
         if (CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_Truncation == STD_ON) {
             /* SWS_CANIF_00893 */
             if (((PduInfoPtr->SduLength > 64) && (Can_FD_BIT == TRUE))
@@ -121,15 +137,8 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
             }
             Can_Pdu.sdu = PduInfoPtr->SduDataPtr;
         }
-    }
 
 
-    if (Can_Return == E_OK) {
-
-
-    }
-
-    if ((Can_Return == E_OK) && (Do_Transmit == TRUE)) {
 
     }
 
