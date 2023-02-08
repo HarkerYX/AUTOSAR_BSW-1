@@ -45,16 +45,17 @@ typedef struct {
 } Can_Controller_Fd_Baudrate_Config;
 
 typedef struct {
-    Can_Opertaion_Mode_Enum        Can_Busoff_Processing;
-    boolean                        Can_Controller_Activation;
-    uint32                         Can_Controller_BaseAddress;
-    uint8                          Can_Controller_Id;
-    Can_Opertaion_Mode_Enum        Can_Rx_Processing;
-    Can_Opertaion_Mode_Enum        Can_Tx_Processing;
-    boolean                        Can_Wakeup_Functionality_API;
-    Can_Opertaion_Mode_Enum        Can_Wakeup_Processing;
-    boolean                        Can_Wakeup_Support;
-    Can_Controller_Baudrate_Config *Can_Controller_Default_Baudrate_Ref;
+    Can_Opertaion_Mode_Enum           Can_Busoff_Processing;
+    boolean                           Can_Controller_Activation;
+    uint32                            Can_Controller_BaseAddress;
+    uint8                             Can_Controller_Id;
+    Can_Opertaion_Mode_Enum           Can_Rx_Processing;
+    Can_Opertaion_Mode_Enum           Can_Tx_Processing;
+    boolean                           Can_Wakeup_Functionality_API;
+    Can_Opertaion_Mode_Enum           Can_Wakeup_Processing;
+    boolean                           Can_Wakeup_Support;
+    Can_Controller_Baudrate_Config    *Can_Controller_Default_Baudrate_Ref;
+    Can_Controller_Fd_Baudrate_Config *Can_Controller_Fd_Baudrate_Config_Ref;
 } Can_Controller;
 
 typedef struct {
