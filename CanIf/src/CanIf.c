@@ -97,16 +97,35 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
         }
     }
 
-    /* SWS_CANIF_00893 */
+    Can_Pdu.id = CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_CanId;
+    Can_FD_BIT = Can_Pdu.id & 0x40000000;
+
     if (Can_Return == E_OK) {
-        Can_Pdu.id = CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_CanId;
-        Can_FD_BIT = Can_Pdu.id & 0x40000000;
-        if (   ((PduInfoPtr->SduLength > 64) && (Can_FD_BIT == TRUE))
+        if (CanIf_Tx_Pdu_Cfg_Group_1[TxPduId].CanIf_Tx_Pdu_Truncation == STD_ON) {
+            /* SWS_CANIF_00893 */
+            if (((PduInfoPtr->SduLength > 64) && (Can_FD_BIT == TRUE))
             || ((PduInfoPtr->SduLength > 8) && (Can_FD_BIT != TRUE))   )
-        {
-            Can_Return = E_NOT_OK;
-            /* Report to DET */
+            {
+                Can_Return = E_NOT_OK;
+                /* Report to DET */
+            }
+            else {
+                /* SWS_CANIF_00894 */
+                Can_Pdu.sdu = PduInfoPtr->SduDataPtr;
+            }
         }
+        else {
+            /* SWS_CANIF_00900 */
+            if ((PduInfoPtr->SduLength > 8) && (Can_FD_BIT != TRUE)) {
+                Can_Return = E_NOT_OK;
+            }
+            Can_Pdu.sdu = PduInfoPtr->SduDataPtr;
+        }
+    }
+
+
+    if (Can_Return == E_OK) {
+
 
     }
 
