@@ -39,4 +39,7 @@ typedef struct {
     uint8            CanIf_Can_Controller_id;
 } CanIf_Hrh_Can_Controller_Config;
 
+extern CanIf_Hth_Can_Controller_Config CanIf_Hth_Can_Controler_Config_Group_1[];
+
+extern CanIf_Hrh_Can_Controller_Config CanIf_Hrh_Can_Controler_Config_Group_1[];
 #endif //AUTOSAR_LIB_CANIF_LCFG_H

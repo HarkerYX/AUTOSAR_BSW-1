@@ -141,46 +141,46 @@ typedef struct {
 } CanIf_Rx_Pdu_Cfg;
 
 typedef struct {
-    uint32                 CanIf_Tx_Pdu_CanId;
-    uint32                 CanIf_Tx_Pdu_CanId_Mask;
-    Can_LPdu_ID_Type_Enum  CanIf_Tx_Pdu_CanId_Type;
-    uint32                 CanIf_Tx_Pdu_Id;
-    boolean                CanIf_Tx_Pdu_Pn_Filter_Pdu;
-    boolean                CanIf_Tx_Pdu_Read_Notify_Status;
-    boolean                CanIf_Tx_Pdu_Trigger_Transmit;
-    boolean                CanIf_Tx_Pdu_Truncation;
-    CanIf_Tx_Pdu_Type_Enum CanIf_Tx_Pdu_Type;
+    uint32                     CanIf_Tx_Pdu_CanId;
+    uint32                     CanIf_Tx_Pdu_CanId_Mask;
+    Can_LPdu_ID_Type_Enum      CanIf_Tx_Pdu_CanId_Type;
+    uint32                     CanIf_Tx_Pdu_Id;
+    boolean                    CanIf_Tx_Pdu_Pn_Filter_Pdu;
+    boolean                    CanIf_Tx_Pdu_Read_Notify_Status;
+    boolean                    CanIf_Tx_Pdu_Trigger_Transmit;
+    boolean                    CanIf_Tx_Pdu_Truncation;
+    CanIf_Tx_Pdu_Type_Enum     CanIf_Tx_Pdu_Type;
     void(*CanIfTxPduUserTriggerTransmitName)(void);
     void(*CanIfTxPduUserTxConfirmationName)(void);
     void(*CanIfTxPduUserTxConfirmationUL)(void);
-    CanIf_Buffer_Cfg       *CanIf_Buffer_Cfg_Ref;
-    uint32                 *Can_If_Tx_Pdu_Ref;
+    CanIf_Buffer_Cfg           *CanIf_Buffer_Cfg_Ref;
+    uint32                     *Can_If_Tx_Pdu_Ref;
 } CanIf_Tx_Pdu_Cfg;
 
 typedef struct {
-    CanIf_Init_Hoh_Cfg     *CanIf_Ctrl_Drv_Init_Hoh_Config_Ref;
-    Can_General            *CanIf_Ctrl_Drv_Name_Ref;
-    CanIf_Ctrl_Cfg         *CanIf_Ctrl_Cfg_Ref;
+    CanIf_Init_Hoh_Cfg         *CanIf_Ctrl_Drv_Init_Hoh_Config_Ref;
+    Can_General                *CanIf_Ctrl_Drv_Name_Ref;
+    CanIf_Ctrl_Cfg             *CanIf_Ctrl_Cfg_Ref;
 } CanIf_Ctrl_Drv_Cfg;
 
 typedef struct {
-    uint8                  CanIf_Init_Config_Set;
-    uint64                 CanIf_Max_Buffer_Size;
-    uint64                 CanIf_Max_Rx_Pdu_Cfg;
-    uint64                 CanIf_Max_Tx_Pdu_Cfg;
-    CanIf_Buffer_Cfg       *CanIf_Buffer_Cfg_Ref;
-    CanIf_Init_Hoh_Cfg     *CanIf_Init_Hoh_Config_Ref;
-    CanIf_Rx_Pdu_Cfg       *CanIf_Rx_Pdu_Cfg_Ref;
-    CanIf_Tx_Pdu_Cfg       *CanIf_Tx_Pdu_Cfg_Ref;
+    uint8                      CanIf_Init_Config_Set;
+    uint64                     CanIf_Max_Buffer_Size;
+    uint64                     CanIf_Max_Rx_Pdu_Cfg;
+    uint64                     CanIf_Max_Tx_Pdu_Cfg;
+    CanIf_Buffer_Cfg           *CanIf_Buffer_Cfg_Ref;
+    CanIf_Init_Hoh_Cfg         *CanIf_Init_Hoh_Config_Ref;
+    CanIf_Rx_Pdu_Cfg           *CanIf_Rx_Pdu_Cfg_Ref;
+    CanIf_Tx_Pdu_Cfg           *CanIf_Tx_Pdu_Cfg_Ref;
 } CanIf_Init_Config;
 
 typedef struct {
-    CanIf_Ctrl_Drv_Cfg     *CanIf_Ctrl_Drv_Cfg_Ref;
-    CanIf_Dispatch_Cfg     *CanIf_Dispatch_Cfg_Ref;
-    CanIf_Init_Config      *CanIf_Init_Config_Ref;
-    CanIf_Private_Cfg      *CanIf_Private_Cfg_Ref;
-    CanIf_Public_Cfg       *CanIf_Public_Cfg_Ref;
-    CanIf_Trcv_Drv_Cfg     *CanIf_Trcv_Drv_Cfg_Ref;
+    CanIf_Ctrl_Drv_Cfg         *CanIf_Ctrl_Drv_Cfg_Ref;
+    CanIf_Dispatch_Cfg         *CanIf_Dispatch_Cfg_Ref;
+    CanIf_Init_Config          *CanIf_Init_Config_Ref;
+    CanIf_Private_Cfg          *CanIf_Private_Cfg_Ref;
+    CanIf_Public_Cfg           *CanIf_Public_Cfg_Ref;
+    CanIf_Trcv_Drv_Cfg         *CanIf_Trcv_Drv_Cfg_Ref;
 } CanIf;
 /***********************************************************************************************************************
 *                                                     Extern                                                           *

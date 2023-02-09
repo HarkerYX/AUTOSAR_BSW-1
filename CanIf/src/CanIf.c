@@ -12,17 +12,20 @@
 /***********************************************************************************************************************
 *                                                   Includes                                                           *
 ***********************************************************************************************************************/
+#include "../../Can/inc/Can.h"
 #include "../inc/CanIf.h"
 #include "../inc/CanIf_Can.h"
 #include "../inc/CanIf_CanTrcv.h"
 #include "../../Config/inc/Can_Types.h"
 #include "../../Config/inc/CanIf_PbCfg.h"
+#include "../../Config/inc/CanIf_LCfg.h"
 /***********************************************************************************************************************
 *                                                  Functions                                                           *
 ***********************************************************************************************************************/
 Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
 {
     Can_ReturnType          Can_Return;
+    Can_ReturnType          Can_Write_Return = CAN_NOT_OK;
     Can_PduType             Can_Pdu;
     uint8                   Can_Controller_Id;
     uint8                   Can_Object_Id;
@@ -141,7 +144,23 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
         Can_Pdu.length = PduInfoPtr->SduLength;
         Can_Pdu.swPduHandle = TxPduId;
 
+        /* SWS_CANIF_00023, SWS_CANIF_00318, SWS_CANIF_00040*/
+        Can_Write_Return = Can_Write(CanIf_Hth_Can_Controler_Config_Group_1[TxPduId].CanIf_Hth_HW_Id,
+                               (const Can_PduType*) &Can_Pdu);
     }
+
+        /* SWS_CANIF_00162, SWS_CANIF_00381 */
+    switch (Can_Write_Return) {
+        case CAN_OK:
+            Can_Return = E_OK;
+            break;
+        case CAN_NOT_OK:
+            Can_Return = E_NOT_OK;
+            break;
+        case CAN_BUSY:
+            break;
+    }
+
 
     return Can_Return;
 

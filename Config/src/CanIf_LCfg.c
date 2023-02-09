@@ -19,11 +19,11 @@
 /***********************************************************************************************************************
 *                                                 Configurations                                                       *
 ***********************************************************************************************************************/
-static CanIf_Hth_Can_Controller_Config const CanIf_Hth_Can_Controler_Config_Group_1[2] = {
-    {12, 0},
-    {13, 0},
+CanIf_Hth_Can_Controller_Config CanIf_Hth_Can_Controler_Config_Group_1[2] = {
+    {0, 0},
+    {1, 0},
 };
 
-static CanIf_Hrh_Can_Controller_Config const CanIf_Hrh_Can_Controler_Config_Group_1[1] = {
+CanIf_Hrh_Can_Controller_Config CanIf_Hrh_Can_Controler_Config_Group_1[1] = {
     {0, 0}
 };
