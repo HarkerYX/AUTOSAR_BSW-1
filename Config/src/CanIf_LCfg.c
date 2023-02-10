@@ -136,3 +136,4 @@ struct CanIf_Buffer CanIf_BUffer_Head_List[1] = {
 
 };
 
+Can_ControllerStateType CanIf_Controller_Mode_Local[3];

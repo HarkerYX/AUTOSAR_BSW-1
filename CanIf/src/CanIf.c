@@ -33,6 +33,27 @@ static Std_ReturnType  CanIf_BufferTransmitMessage(PduIdType TxPduId, Can_PduTyp
     ;
 }
 
+Std_ReturnType CanIf_GetControllerMode(uint8 ControllerId, Can_ControllerStateType *ControllerModePtr) {
+    Std_ReturnType Can_Return = E_OK;
+
+    if (CanIf_Init_Status == CANIF_UNINITIALIZED) {
+        /* Report to Det */
+        Can_Return = E_NOT_OK;
+    }
+
+    /* SWS_CANIF_00313 */
+    if (ControllerId > CANIF_CONTROLLER_MAX_NUM) {
+        /* Report to DET */
+        Can_Return = E_NOT_OK;
+    }
+
+    if (Can_Return == E_OK) {
+        *ControllerModePtr = CanIf_Controller_Mode_Local[ControllerId];
+    }
+
+    return Can_Return;
+}
+
 Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
 {
     Can_ReturnType          Can_Return;

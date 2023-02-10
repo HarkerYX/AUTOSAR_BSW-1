@@ -52,6 +52,8 @@ typedef struct {
     struct CanIf_Buffer*      back;
 } CanIf_Buffer;
 
+extern Can_ControllerStateType CanIf_Controller_Mode_Local[];
+
 extern CanIf_Hth_Can_Controller_Config CanIf_Hth_Can_Controler_Config_Group_1[];
 
 extern CanIf_Hrh_Can_Controller_Config CanIf_Hrh_Can_Controler_Config_Group_1[];
