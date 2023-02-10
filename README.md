@@ -1,4 +1,4 @@
-# AUTOSAR_LIB
+# AUTOSAR BOSW
 
 ### INTRODUCTION
 The main purpose of this project is to implement CLASSIC AUTOSAR BSW STACK.
