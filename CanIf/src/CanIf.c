@@ -19,6 +19,13 @@
 #include "../../Config/inc/Can_Types.h"
 #include "../../Config/inc/CanIf_PbCfg.h"
 #include "../../Config/inc/CanIf_LCfg.h"
+
+/***********************************************************************************************************************
+*                                               Global Variables                                                       *
+***********************************************************************************************************************/
+uint8 CanIf_Init_Status = CANIF_UNINITIALIZED;
+
+
 /***********************************************************************************************************************
 *                                                  Functions                                                           *
 ***********************************************************************************************************************/
@@ -180,3 +187,18 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
 
 }
 
+Std_ReturnType CanIf_SetControllerMode(uint8 ControllerId, Can_ControllerStateType ControllerMode) {
+    Can_ReturnType Can_Return = E_NOT_OK;
+
+    /* SWS_CANIF_00312 */
+    if (CanIf_Init_Status == CANIF_UNINITIALIZED) {
+        /* Report to DET */
+        Can_Return = E_NOT_OK;
+    }
+
+    /* SWS_CANIF_00311 */
+    if (ControllerId > CANIF_CONTROLLER_MAX_NUM) {
+        /* Report to DET */
+        Can_Return = E_NOT_OK;
+    }
+}

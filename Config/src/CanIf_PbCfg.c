@@ -45,7 +45,7 @@ Can_Controller Can_Controller_Group_1[1] = {
     }
 };
 
-CanIf_Ctrl_Cfg CanIf_Ctrl_Cfg_Group_1[1] = {
+CanIf_Ctrl_Cfg CanIf_Ctrl_Cfg_Group_1[CANIF_CONTROLLER_MAX_NUM] = {
     {
         .CanIf_Ctrl_Id             = 1,
         .CanIf_Ctrl_Wakeup_Support = STD_OFF,
