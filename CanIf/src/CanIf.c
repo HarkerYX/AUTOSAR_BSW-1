@@ -22,6 +22,10 @@
 /***********************************************************************************************************************
 *                                                  Functions                                                           *
 ***********************************************************************************************************************/
+static Std_ReturnType  CanIf_BufferTransmitMessage(PduIdType TxPduId, Can_PduType Can_Pdu) {
+    ;
+}
+
 Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
 {
     Can_ReturnType          Can_Return;
@@ -158,10 +162,21 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
             Can_Return = E_NOT_OK;
             break;
         case CAN_BUSY:
+            if (CanIf_Group_1[0].CanIf_Public_Cfg_Ref->CanIf_Public_Tx_Buffering == TRUE) {
+                CanIf_BufferTransmitMessage(TxPduId, Can_Pdu);
+            }
+            else {
+                Can_Return = E_NOT_OK;
+            }
             break;
+        default: {
+            Can_Return = E_NOT_OK;
+            break;
+        }
     }
 
 
     return Can_Return;
 
 }
+

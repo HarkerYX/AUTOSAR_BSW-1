@@ -154,7 +154,7 @@ typedef struct {
     void(*CanIfTxPduUserTxConfirmationName)(void);
     void(*CanIfTxPduUserTxConfirmationUL)(void);
     CanIf_Buffer_Cfg           *CanIf_Buffer_Cfg_Ref;
-    uint32                     *Can_If_Tx_Pdu_Ref;
+    uint32                     *CanIf_Tx_Pdu_Ref;
 } CanIf_Tx_Pdu_Cfg;
 
 typedef struct {
