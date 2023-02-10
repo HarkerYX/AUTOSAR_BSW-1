@@ -187,8 +187,10 @@ Std_ReturnType CanIf_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr)
 
 }
 
-Std_ReturnType CanIf_SetControllerMode(uint8 ControllerId, Can_ControllerStateType ControllerMode) {
-    Can_ReturnType Can_Return = E_NOT_OK;
+Std_ReturnType CanIf_SetControllerMode(uint8 ControllerId, Can_ControllerStateType Set_Controller_Mode) {
+    Std_ReturnType          Can_Return = E_OK;
+    Can_ReturnType          Can_Result = CAN_NOT_OK;
+    Can_ControllerStateType Get_Controller_Mode;
 
     /* SWS_CANIF_00312 */
     if (CanIf_Init_Status == CANIF_UNINITIALIZED) {
@@ -201,4 +203,63 @@ Std_ReturnType CanIf_SetControllerMode(uint8 ControllerId, Can_ControllerStateTy
         /* Report to DET */
         Can_Return = E_NOT_OK;
     }
+
+    /* SWS_CANIF_00040,  SWS_CANIF_00308 */
+    if (Can_Return == E_OK) {
+
+        CanIf_GetControllerMode(ControllerId, &Get_Controller_Mode);
+
+        if (Get_Controller_Mode == CAN_CS_UNINIT) {
+            Can_Return = E_NOT_OK;
+        }
+    }
+
+    if (Can_Return == E_OK) {
+        switch (Set_Controller_Mode) {
+
+            case CAN_CS_UNINIT: {
+                Can_Return = E_NOT_OK;
+                break;
+            }
+            case CAN_CS_STARTED: {
+                /* SWS_CANIF_00714 */
+                if (Get_Controller_Mode != CAN_CS_SLEEP) {
+                    Can_Result = Can_SetControllerMode(ControllerId, CAN_CS_STARTED);
+                    Can_Return = E_OK;
+                }
+                else {
+                    Can_Return = E_NOT_OK;
+                }
+            }
+                break;
+            case CAN_CS_STOPPED:
+                /* SWS_CANIF_00480 */
+                Can_Result = Can_SetControllerMode(ControllerId, CAN_CS_STOPPED);
+                Can_Return = E_OK;
+                break;
+            case CAN_CS_SLEEP: {
+                if (Get_Controller_Mode == CAN_CS_STARTED) {
+                    Can_Return = E_NOT_OK;
+                }
+
+                /* SWS_CANIF_481 */
+                if (Get_Controller_Mode == CAN_CS_STOPPED) {
+                    Can_Result = Can_SetControllerMode(ControllerId, CAN_CS_SLEEP);
+                    Can_Return = E_OK;
+                }
+                break;
+            }
+
+            default: {
+                Can_Return = E_NOT_OK;
+                break;
+            }
+        }
+    }
+
+    if (Can_Result != CAN_OK) {
+        Can_Return = E_NOT_OK;
+    }
+
+    return Can_Return;
 }
