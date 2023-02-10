@@ -257,6 +257,7 @@ Std_ReturnType CanIf_SetControllerMode(uint8 ControllerId, Can_ControllerStateTy
         }
     }
 
+    /* SWS_CANF_00475 */
     if (Can_Result != CAN_OK) {
         Can_Return = E_NOT_OK;
     }
