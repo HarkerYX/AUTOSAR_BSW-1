@@ -285,3 +285,24 @@ Std_ReturnType CanIf_SetControllerMode(uint8 ControllerId, Can_ControllerStateTy
 
     return Can_Return;
 }
+
+Std_ReturnType CanIf_GetControllerErrorState(uint8 ControllerId, Can_ErrorStateType *ErrorStatePtr) {
+    Std_ReturnType          Can_Return = E_OK;
+    Can_ReturnType          Can_Result = CAN_NOT_OK;
+    Can_ControllerStateType Get_Controller_Mode;
+
+    /* SWS_CANIF_00898 */
+    if (ControllerId > CANIF_CONTROLLER_MAX_NUM) {
+        /* Report to DET */
+        Can_Return = E_NOT_OK;
+    }
+
+    /* SWS_CANIF_00899 */
+    if (ErrorStatePtr == NULL) {
+        /* Report to DET */
+        Can_Return = E_NOT_OK;
+    }
+
+    return Can_Return;
+}
+
