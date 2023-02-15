@@ -41,4 +41,4 @@ add_executable(AUTOSAR_LIB main.c
         Config/src/CanSM_LCfg.c
         Config/inc/CanSM_LCfg.h
         CanTP/src/CanTp.c
-        CanTP/inc/CanTp.h)
+        CanTP/inc/CanTp.h Config/src/CanTp_PbCfg.c Config/inc/CanTp_PbCfg.h Config/src/CanTp_LCfg.c Config/inc/CanTp_LCfg.h)
