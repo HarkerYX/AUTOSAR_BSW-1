@@ -306,3 +306,13 @@ Std_ReturnType CanIf_GetControllerErrorState(uint8 ControllerId, Can_ErrorStateT
     return Can_Return;
 }
 
+Std_ReturnType CanIf_ReadRxPduData(PduIdType CanIfRxSduId, PduInfoType *CanIfRxInfoPtr) {
+    Std_ReturnType          Can_Return = E_OK;
+    Can_ReturnType          Can_Result = CAN_NOT_OK;
+    Can_ControllerStateType Get_Controller_Mode;
+
+
+
+    Get_Controller_Mode = CanIf_GetControllerMode()
+}
+

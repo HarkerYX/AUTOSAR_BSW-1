@@ -35,4 +35,10 @@ typedef enum {
     ICOM_SWITCH_E_FAILED = 0x01,
 } IcomSwitch_ErrorType;
 
+typedef enum {
+    TP_STMIN = 0x00,
+    TP_BS    = 0x01,
+    TP_BC    = 0x02,
+} TPParameterType;
+
 #endif //AUTOSAR_LIB_COMSTACKTYPES_H
