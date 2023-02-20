@@ -60,10 +60,12 @@ void CanTp_TX_MainFunction(void) {
                     /* N_CS timeout. But STmin is not expired.
                      * Reset STmin, prepare to transmit CF.  */
                     case CanTp_TX_Wait_STmin: {
+                        TX_Channel_State.STmin = 0;
+                        TX_Channel_State.Channel_State = CanTp_TX_Prepare_Transmit_CF;
                         break;
                     }
 
-                    /* Something */
+                    /* Something wrong */
                     case CanTp_TX_Prepare_Transmit_SF:
                     case CanTp_TX_Prepare_Transmit_FF:
                     case CanTp_TX_Prepare_Transmit_CF: {
