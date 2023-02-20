@@ -1,8 +1,8 @@
 /***********************************************************************************************************************
  *
- * Module:       CanTP
+ * Module:       CanTp
  *
- * File Name:    CanTP.h
+ * File Name:    CanTp.h
  *
  * Author:       yiyang.cai@pm.me
  *
@@ -26,7 +26,9 @@
 
 #define CANTP_OFF 0
 #define CANTP_ON  1
-
+#define CANTP_STATE_INITIALIZED     1
+#define CANTP_STATE_NOT_INITIALIZED 0
+#define CANTP_SHUTDOWN              0
 /***********************************************************************************************************************
 *                                               Type definitions                                                       *
 ***********************************************************************************************************************/
@@ -54,41 +56,31 @@ typedef enum {
     CANTP_PHYSICAL         = 0x03,
 } CanTpTaType_Enum;
 
+/***********************************************************************************************************************
+*                                            Global Flag definitions                                                   *
+***********************************************************************************************************************/
+uint8 CanTp_InitState;
+
 
 /***********************************************************************************************************************
 *                                           State Machine definitions                                                  *
 ***********************************************************************************************************************/
 typedef enum {
     CanTp_Tx_IDLE                = 0x00,
-    CanTP_TX_Transmit_SF         = 0x01,
-    CanTP_TX_Transmit_FF         = 0x02,
-    CanTP_TX_Transmit_CF         = 0x03,
-    CanTP_TX_Wait_Confirm_SF     = 0x04,
-    CanTP_TX_Wait_Confirm_FF     = 0x05,
-    CanTP_TX_Wait_Confirm_CF     = 0x06,
-    CanTP_TX_Prepare_Transmit_SF = 0x07,
-    CanTP_TX_Prepare_Transmit_FF = 0x08,
-    CanTP_TX_Prepare_Transmit_CF = 0x09,
-    CanTp_Tx_Wait_STmin          = 0x0A,
-} CanTP_TX_SM;
+    CanTp_TX_Transmit_SF         = 0x01,
+    CanTp_TX_Transmit_FF         = 0x02,
+    CanTp_TX_Transmit_CF         = 0x03,
+    CanTp_TX_Wait_Confirm_SF     = 0x04,
+    CanTp_TX_Wait_Confirm_FF     = 0x05,
+    CanTp_TX_Wait_Confirm_CF     = 0x06,
+    CanTp_TX_Prepare_Transmit_SF = 0x07,
+    CanTp_TX_Prepare_Transmit_FF = 0x08,
+    CanTp_TX_Prepare_Transmit_CF = 0x09,
+    CanTp_TX_Wait_STmin          = 0x0A,
+    CanTp_TX_Wait_FC             = 0x0B,
+} CanTp_TX_SM;
 
-typedef struct {
-    volatile uint16      Timer;
-    uint16               STmin;
-    volatile uint16      Stmin_Timer;
-    uint16               Data_Length;
-    uint16               Data_Index;
-    PduIdType            TX_SDU_Handle;
-    volatile CanTP_TX_SM Channel_State;
-    BufReq_ReturnType    Buffer_State;
-    uint8                BS;
-    uint8                BS_Counter;
-    uint8                Payload_Length;
-    uint8                Payload[7];
-    uint8                Secquence_Number;
-    uint8                FC_Length;
-    uint8                FC_Data[4];
-} CanTP_TX_State_Type;
+
 
 /***********************************************************************************************************************
 *                                                  Functions                                                           *

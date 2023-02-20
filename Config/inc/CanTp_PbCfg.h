@@ -125,4 +125,25 @@ typedef struct {
     CanTpGeneral *CanTpGeneral_Ref;
 } CanTp;
 
+typedef struct {
+    volatile uint16      Timer;
+    uint16               STmin;
+    volatile uint16      Stmin_Timer;
+    uint16               Data_Length;
+    uint16               Data_Index;
+    PduIdType            TX_SDU_Handle;
+    volatile CanTp_TX_SM Channel_State;
+    BufReq_ReturnType    Buffer_State;
+    uint8                BS;
+    uint8                BS_Counter;
+    uint8                Payload_Length;
+    uint8                Payload[7];
+    uint8                Secquence_Number;
+    uint8                FC_Length;
+    uint8                FC_Data[4];
+} CanTp_TX_State_Type;
+
+
+
+extern CanTp_TX_State_Type CanTp_TX_State[3];
 #endif //AUTOSAR_LIB_CANTP_PBCONFIG_H
