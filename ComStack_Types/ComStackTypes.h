@@ -41,4 +41,12 @@ typedef enum {
     TP_BC    = 0x02,
 } TPParameterType;
 
+typedef enum
+{
+    BUFREQ_OK       = 0x00,
+    BUFREQ_E_NOT_OK = 0x01,
+    BUFREQ_E_BUSY   = 0x02,
+    BUFREQ_E_OVFL   = 0x03
+} BufReq_ReturnType;
+
 #endif //AUTOSAR_LIB_COMSTACKTYPES_H

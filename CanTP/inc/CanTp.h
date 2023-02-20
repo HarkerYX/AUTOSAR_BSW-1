@@ -54,6 +54,42 @@ typedef enum {
     CANTP_PHYSICAL         = 0x03,
 } CanTpTaType_Enum;
 
+
+/***********************************************************************************************************************
+*                                           State Machine definitions                                                  *
+***********************************************************************************************************************/
+typedef enum {
+    CanTp_Tx_IDLE                = 0x00,
+    CanTP_TX_Transmit_SF         = 0x01,
+    CanTP_TX_Transmit_FF         = 0x02,
+    CanTP_TX_Transmit_CF         = 0x03,
+    CanTP_TX_Wait_Confirm_SF     = 0x04,
+    CanTP_TX_Wait_Confirm_FF     = 0x05,
+    CanTP_TX_Wait_Confirm_CF     = 0x06,
+    CanTP_TX_Prepare_Transmit_SF = 0x07,
+    CanTP_TX_Prepare_Transmit_FF = 0x08,
+    CanTP_TX_Prepare_Transmit_CF = 0x09,
+    CanTp_Tx_Wait_STmin          = 0x0A,
+} CanTP_TX_SM;
+
+typedef struct {
+    volatile uint16      Timer;
+    uint16               STmin;
+    volatile uint16      Stmin_Timer;
+    uint16               Data_Length;
+    uint16               Data_Index;
+    PduIdType            TX_SDU_Handle;
+    volatile CanTP_TX_SM Channel_State;
+    BufReq_ReturnType    Buffer_State;
+    uint8                BS;
+    uint8                BS_Counter;
+    uint8                Payload_Length;
+    uint8                Payload[7];
+    uint8                Secquence_Number;
+    uint8                FC_Length;
+    uint8                FC_Data[4];
+} CanTP_TX_State_Type;
+
 /***********************************************************************************************************************
 *                                                  Functions                                                           *
 ***********************************************************************************************************************/
@@ -76,5 +112,9 @@ Std_ReturnType CanTp_ReadParameter(PduIdType id, TPParameterType parameter, uint
 void CanTp_RxIndication(PduIdType RxPduId, const PduInfoType *PduInfoPtr);
 
 void CanTp_TxConfirmation(PduIdType TxPduId);
+
+void CanTp_TX_MainFunction(void);
+
+void CanTp_Rx_MainFunction(void);
 
 #endif //AUTOSAR_LIB_CANTP_H
