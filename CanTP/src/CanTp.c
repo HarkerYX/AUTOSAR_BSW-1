@@ -14,6 +14,10 @@
 /***********************************************************************************************************************
 *                                                  Functions                                                           *
 ***********************************************************************************************************************/
+static void CanTp_TX_Error_Handler(uint8 Error, CanTp_TX_State_Type TX_State, Std_ReturnType result) {
+
+}
+
 void CanTp_TX_MainFunction(void) {
 
     CanTp_TX_State_Type TX_Channel_State;
@@ -48,12 +52,14 @@ void CanTp_TX_MainFunction(void) {
                     case CanTp_TX_Wait_Confirm_CF:
                     case CanTp_TX_Wait_Confirm_FF:
                     case CanTp_TX_Wait_Confirm_SF: {
+                        CanTp_TX_Error_Handler(CANTP_E_TX_TIMEOUT_AS, TX_Channel_State, E_NOT_OK);
                         break;
                     }
 
                     /* N_BS timeout. But no FC received.
                      * Handle Error. */
                     case CanTp_TX_Wait_FC: {
+                        CanTp_TX_Error_Handler(CANTP_E_TX_TIMEOUT_BS, TX_Channel_State, E_NOT_OK);
                         break;
                     }
 
@@ -69,6 +75,7 @@ void CanTp_TX_MainFunction(void) {
                     case CanTp_TX_Prepare_Transmit_SF:
                     case CanTp_TX_Prepare_Transmit_FF:
                     case CanTp_TX_Prepare_Transmit_CF: {
+                        CanTp_TX_Error_Handler(CANTP_E_TX_TIMEOUT_CS, TX_Channel_State, E_NOT_OK);
                         break;
                     }
                 }

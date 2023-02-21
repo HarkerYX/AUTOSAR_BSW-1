@@ -31,7 +31,7 @@
 #define CANTP_STATE_NOT_INITIALIZED 0
 #define CANTP_SHUTDOWN              0
 
-/* Development Errors
+/* AUTOSAR Development Errors
  * SWS_CANTP_00293 */
 #define CANTP_E_PARAM_CONFIG        0x01
 #define CANTP_E_PARAM_ID            0x02
@@ -41,7 +41,7 @@
 #define CANTP_E_INVALID_TX_ID       0x30
 #define CANTP_E_INVALID_RX_ID       0x40
 
-/* Runtime Errors
+/* AUTOSAR Runtime Errors
  * SWS_CANTP_00352 */
 #define CANTP_E_PADDING             0x70
 #define CANTP_E_INVALID_TATYPE      0x90
@@ -49,6 +49,11 @@
 #define CANTP_E_COM                 0xB0
 #define CANTP_E_RX_COM              0xC0
 #define CANTP_E_TX_COM              0xD0
+
+/* Detal self-defined Errors */
+#define CANTP_E_TX_TIMEOUT_AS       0xD1
+#define CANTP_E_TX_TIMEOUT_BS       0xD2
+#define CANTP_E_TX_TIMEOUT_CS       0xD3
 /***********************************************************************************************************************
 *                                               Type definitions                                                       *
 ***********************************************************************************************************************/
