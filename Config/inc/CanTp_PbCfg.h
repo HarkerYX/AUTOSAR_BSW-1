@@ -90,11 +90,11 @@ typedef struct {
     boolean          CanTpTxPaddingActivation;
     CanTpTaType_Enum CanTpTxTaType;
     PduIdType        CanTpTxNSduRef;
-    CanTp_NAe          CanTp_NAe_Group[1];
-    CanTp_NSa          CanTp_NSa_Group[1];
-    CanTp_NTa          CanTp_NTa_Group[1];
-    CanTpTxNPdu        CanTpTxNPdu_Group[1];
-    CanTpRxFcNPdu      CanTpRxFcNPdu_Group[1];
+    CanTp_NAe        CanTp_NAe_Group[1];
+    CanTp_NSa        CanTp_NSa_Group[1];
+    CanTp_NTa        CanTp_NTa_Group[1];
+    CanTpTxNPdu      CanTpTxNPdu_Group[1];
+    CanTpRxFcNPdu    CanTpRxFcNPdu_Group[1];
 } CanTpTxNSdu;
 
 typedef struct {
