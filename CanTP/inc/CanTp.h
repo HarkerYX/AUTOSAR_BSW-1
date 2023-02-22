@@ -31,6 +31,8 @@
 #define CANTP_STATE_NOT_INITIALIZED 0
 #define CANTP_SHUTDOWN              0
 
+#define CANTP_E_NO_ERROR            0xFF
+
 /* AUTOSAR Development Errors
  * SWS_CANTP_00293 */
 #define CANTP_E_PARAM_CONFIG        0x01
@@ -50,10 +52,23 @@
 #define CANTP_E_RX_COM              0xC0
 #define CANTP_E_TX_COM              0xD0
 
-/* Detal self-defined Errors */
+/* Detail self-defined Errors */
 #define CANTP_E_TX_TIMEOUT_AS       0xD1
 #define CANTP_E_TX_TIMEOUT_BS       0xD2
 #define CANTP_E_TX_TIMEOUT_CS       0xD3
+
+/* Length */
+#define CANTP_CAN20_FRAME_LENGTH    8
+
+/* ISO 15765-2:2016 Table 9 */
+#define CANTP_PCI_LENGTH_SF         1
+#define CANTP_PCI_LENGTH_FF         2
+#define CANTP_PCI_LENGTH_CF         1
+#define CANTP_PCI_LENGTH_FC         3
+
+#define CANTP_TX_MAX_PAYLOAD_SF     CANTP_CAN20_FRAME_LENGTH - CANTP_PCI_LENGTH_SF
+#define CANTP_TX_MAX_PAYLOAD_CF     CANTP_CAN20_FRAME_LENGTH - CANTP_PCI_LENGTH_CF
+#define CANTP_TX_MAX_PAYLOAD_FF     CANTP_CAN20_FRAME_LENGTH - CANTP_PCI_LENGTH_FF
 /***********************************************************************************************************************
 *                                               Type definitions                                                       *
 ***********************************************************************************************************************/
@@ -80,11 +95,6 @@ typedef enum {
     CANTP_FUNCTIONAL       = 0x02,
     CANTP_PHYSICAL         = 0x03,
 } CanTpTaType_Enum;
-
-/***********************************************************************************************************************
-*                                            Global Flag definitions                                                   *
-***********************************************************************************************************************/
-uint8 CanTp_InitState;
 
 
 /***********************************************************************************************************************
@@ -116,7 +126,7 @@ void CanTp_GetVersionInfo(Std_VersionInfoType *versioninfo);
 
 void CanTp_Shutdown(void);
 
-Std_ReturnType CanTp_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr);
+extern Std_ReturnType CanTp_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr);
 
 Std_ReturnType CanTp_CancelTransmit(PduIdType TxPduId);
 
