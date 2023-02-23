@@ -69,6 +69,12 @@
 #define CANTP_TX_MAX_PAYLOAD_SF     CANTP_CAN20_FRAME_LENGTH - CANTP_PCI_LENGTH_SF
 #define CANTP_TX_MAX_PAYLOAD_CF     CANTP_CAN20_FRAME_LENGTH - CANTP_PCI_LENGTH_CF
 #define CANTP_TX_MAX_PAYLOAD_FF     CANTP_CAN20_FRAME_LENGTH - CANTP_PCI_LENGTH_FF
+
+/***********************************************************************************************************************
+*                                               Function MACRO                                                          *
+***********************************************************************************************************************/
+#define CanTp_PduRCopyTxData() BUFREQ_OK
+
 /***********************************************************************************************************************
 *                                               Type definitions                                                       *
 ***********************************************************************************************************************/
