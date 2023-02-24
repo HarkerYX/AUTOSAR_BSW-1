@@ -59,12 +59,20 @@
 
 /* Length */
 #define CANTP_CAN20_FRAME_LENGTH    8
+#define CANTP_LONG_FF_LENGTH        4095
 
 /* ISO 15765-2:2016 Table 9 */
 #define CANTP_PCI_LENGTH_SF         1
 #define CANTP_PCI_LENGTH_FF         2
 #define CANTP_PCI_LENGTH_CF         1
 #define CANTP_PCI_LENGTH_FC         3
+#define CANTP_PCI_LENGTH_LONG_SF    2
+#define CANTP_PCI_LENGTH_LONG_FF    6
+
+#define CANTP_PCI_TYPE_SF           0x00
+#define CANTP_PCI_TYPE_FF           0x10
+#define CANTP_PCI_TYPE_CF           0x20
+#define CANTP_PCI_TYPE_FC           0x30
 
 #define CANTP_TX_MAX_PAYLOAD_SF     CANTP_CAN20_FRAME_LENGTH - CANTP_PCI_LENGTH_SF
 #define CANTP_TX_MAX_PAYLOAD_CF     CANTP_CAN20_FRAME_LENGTH - CANTP_PCI_LENGTH_CF

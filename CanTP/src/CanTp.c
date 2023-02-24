@@ -44,6 +44,14 @@ static uint16 CanTp_Get_TX_N_BR(PduIdType TX_SDU_ID) {
 
 }
 
+static Std_ReturnType CanTp_CanIf_Transmit_Frame(void){}
+
+static inline void CanTp_Memory_Copy(const uint8 *source, uint8 *destination, uint16 length) {
+    for (int i = 0; i < length; i++) {
+        destination[i] = source[i];
+    }
+}
+
 static void CanTp_Get_TX_Channel_State(CanTp_TX_State_Type *TX_Channel_State, PduIdType TX_SDU_ID) {
 
 }
@@ -53,7 +61,105 @@ static void CanTp_TX_Error_Handler(uint8 Error, CanTp_TX_State_Type *TX_State, S
 }
 
 static void CanTp_TX_Transmit(CanTp_TX_State_Type *TX_Channel_State){
+    PduInfoType Temp_PDU;
+    uint8       Frame_Buffer[8];
+    Std_ReturnType return_value = E_OK;
 
+    Temp_PDU.SduDataPtr = &Frame_Buffer[0];
+    Temp_PDU.SduLength  = 0;
+
+    /* Assemble Frames */
+    switch (TX_Channel_State->Channel_State) {
+        case CanTp_TX_Transmit_SF: {
+            Temp_PDU.SduDataPtr[0] = CANTP_PCI_TYPE_SF;
+
+            /* CAN FD or CAN CLASSIC? */
+            if ((CANTP_PCI_LENGTH_SF + TX_Channel_State->Payload_Length) > CANTP_CAN20_FRAME_LENGTH) {
+                Temp_PDU.SduLength = CANTP_PCI_LENGTH_LONG_SF;
+                Temp_PDU.SduDataPtr[1] = TX_Channel_State->Data_Length;
+            }
+            else {
+                Temp_PDU.SduLength = CANTP_PCI_LENGTH_SF;
+                Temp_PDU.SduDataPtr[1] = TX_Channel_State->Data_Length;
+            }
+
+            break;
+        }
+
+        case CanTp_TX_Transmit_FF: {
+
+            /* Check whether long FF */
+            if (TX_Channel_State->Data_Length > CANTP_LONG_FF_LENGTH) {
+                Temp_PDU.SduDataPtr[0] = CANTP_PCI_TYPE_FF;
+                Temp_PDU.SduDataPtr[1] = 0;
+                Temp_PDU.SduDataPtr[2] = ((TX_Channel_State->Data_Length) >> 24);
+                Temp_PDU.SduDataPtr[3] = ((TX_Channel_State->Data_Length) >> 16);
+                Temp_PDU.SduDataPtr[4] = ((TX_Channel_State->Data_Length) >> 8);
+                Temp_PDU.SduDataPtr[5] = TX_Channel_State->Data_Length;
+
+                Temp_PDU.SduLength = CANTP_PCI_LENGTH_LONG_FF;
+            }
+            else {
+                Temp_PDU.SduDataPtr[0] = CANTP_PCI_TYPE_FF;
+                Temp_PDU.SduDataPtr[1] = CANTP_PCI_TYPE_FF | (TX_Channel_State->Data_Length >> 8);
+                Temp_PDU.SduDataPtr[2] = (uint8)TX_Channel_State->Data_Length;
+
+                Temp_PDU.SduLength = CANTP_PCI_LENGTH_FF;
+            }
+
+            TX_Channel_State->Secquence_Number = 1;
+            TX_Channel_State->BS_Counter = 0;
+            TX_Channel_State->Data_Index = 0;
+
+            break;
+        }
+
+        case CanTp_TX_Transmit_CF: {
+            Temp_PDU.SduDataPtr[0] = CANTP_PCI_TYPE_CF | (TX_Channel_State->Secquence_Number);
+
+            Temp_PDU.SduLength = CANTP_PCI_LENGTH_CF;
+            break;
+        }
+
+        default: {
+            return_value = E_NOT_OK;
+            /* Report to DET */
+            break;
+        }
+    }
+
+    /* Copy Payload and transmit */
+    if (return_value == E_OK) {
+        CanTp_Memory_Copy((&Temp_PDU.SduDataPtr[Temp_PDU.SduLength]), &TX_Channel_State->Payload[0],
+                          TX_Channel_State->Payload_Length);
+
+        Temp_PDU.SduLength += TX_Channel_State->Payload_Length;
+
+        /* Transmit */
+        return_value = CanTp_CanIf_Transmit_Frame();
+    }
+
+    if (return_value == E_OK) {
+        switch (TX_Channel_State->Channel_State) {
+            case CanTp_TX_Transmit_SF: {
+                TX_Channel_State->Channel_State = CanTp_TX_Wait_Confirm_SF;
+                TX_Channel_State->Data_Index    = TX_Channel_State->Data_Index + TX_Channel_State->Payload_Length;
+                break;
+            }
+
+            case CanTp_TX_Transmit_FF: {
+                TX_Channel_State->Channel_State = CanTp_TX_Wait_Confirm_FF;
+                TX_Channel_State->Data_Index    = TX_Channel_State->Data_Index + TX_Channel_State->Payload_Length;
+                break;
+            }
+
+            case CanTp_TX_Transmit_CF: {
+                TX_Channel_State->Channel_State = CanTp_TX_Wait_Confirm_CF;
+                TX_Channel_State->Data_Index    = TX_Channel_State->Data_Index + TX_Channel_State->Payload_Length;
+                break;
+            }
+        }
+    }
 }
 
 static Std_ReturnType CanTp_TX_Transmit_Prepare(CanTp_TX_State_Type *TX_Channel_State) {
