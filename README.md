@@ -11,7 +11,8 @@ Nice docs, notes and pictures provided.
 #### CAN communication stack
 1. CanIf (Pending)
 2. CanTrcv (Pending)
-3. CanTp (Working)
+3. CanTp_TX (Done)
+4. CanTp_RX (Working)
 
 ### HOW TO USE
 1. After implementing the CAN communication stack, I will verify it on a development board.
