@@ -350,7 +350,7 @@ void CanTp_TX_MainFunction(void) {
                     case CanTp_TX_Transmit_SF:
                     case CanTp_TX_Transmit_FF:
                     case CanTp_TX_Transmit_CF: {
-                        CanTp_TX_Transmit_Prepare(TX_Channel_State);
+                        CanTp_TX_Transmit(TX_Channel_State);
                         break;
                     }
                     default : {
