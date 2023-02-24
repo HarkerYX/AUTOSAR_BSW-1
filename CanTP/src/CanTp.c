@@ -32,15 +32,15 @@ static uint16 CanTp_Get_TX_N_BS(PduIdType TX_SDU_ID) {
 
 }
 
-static uint16 CanTp_Get_TX_N_CR(PduIdType TX_SDU_ID) {
+static uint16 CanTp_Get_TX_N_CR(PduIdType RX_SDU_ID) {
 
 }
 
-static uint16 CanTp_Get_TX_N_AR(PduIdType TX_SDU_ID) {
+static uint16 CanTp_Get_TX_N_AR(PduIdType RX_SDU_ID) {
 
 }
 
-static uint16 CanTp_Get_TX_N_BR(PduIdType TX_SDU_ID) {
+static uint16 CanTp_Get_TX_N_BR(PduIdType RX_SDU_ID) {
 
 }
 
@@ -57,6 +57,18 @@ static void CanTp_Get_TX_Channel_State(CanTp_TX_State_Type *TX_Channel_State, Pd
 }
 
 static void CanTp_TX_Error_Handler(uint8 Error, CanTp_TX_State_Type *TX_State, Std_ReturnType result) {
+
+}
+
+static void CanTp_RX_Error_Handler(uint8 Error, CanTp_RX_State_Type *RX_State, Std_ReturnType result) {
+
+}
+
+static void CanTp_Rx_Transmit(CanTp_RX_State_Type *RX_Channel_State) {
+
+}
+
+static void CanTp_RX_Store(CanTp_RX_State_Type *RX_Channel_State) {
 
 }
 
@@ -247,7 +259,7 @@ void CanTp_TX_MainFunction(void) {
     uint8 channel_Id;
 
     if (CanTp_InitState == CANTP_STATE_INITIALIZED) {
-        for (channel_Id = 0; channel_Id < CANTP_CHANNEL_NUMS; channel_Id++) {
+        for (channel_Id = 0; channel_Id < CANTP_TX_CHANNEL_NUMS; channel_Id++) {
 
             *TX_Channel_State = CanTp_TX_State[channel_Id];
 
@@ -325,6 +337,71 @@ void CanTp_TX_MainFunction(void) {
                     }
                 }
 
+            }
+        }
+    }
+}
+
+void CanTp_RX_MainFunction(void) {
+    CanTp_RX_State_Type *RX_Channel_State;
+    uint8 channel_Id;
+
+    if (CanTp_InitState == CANTP_STATE_INITIALIZED) {
+        for (channel_Id = 0; channel_Id < CANTP_RX_CHANNEL_NUMS; channel_Id++) {
+            *RX_Channel_State = CanTp_RX_State[channel_Id];
+z
+            RX_Channel_State->Timer--;
+            if (RX_Channel_State->Timer == 0) {
+                switch (RX_Channel_State->Channel_State) {
+                    /* N_CR timeout */
+                    case CanTp_RX_Wait_CF: {
+                        CanTp_RX_Error_Handler(CANTP_E_RX_TIMEOUT_CR, RX_Channel_State, E_NOT_OK);
+                        break;
+                    }
+
+                    /* N_AR timeout */
+                    case CanTp_RX_Wait_Confirm_FC_CTS:
+                    case CanTp_RX_Wait_Confirm_FC_WT:
+                    case CanTp_RX_Transmit_FC_WT:
+                    case CanTp_RX_Transmit_FC_CTS: {
+                        CanTp_RX_Error_Handler(CANTP_E_RX_TIMEOUT_AR, RX_Channel_State, E_NOT_OK);
+                        break;
+                    }
+
+                    /* N_AR timeout & something wrong with buffer */
+                    case CanTp_RX_Transmit_FC_OVFL:
+                    case CanTp_RX_Wait_Confirm_FC_OVFL: {
+                        CanTp_RX_Error_Handler(CANTP_E_INVALID_RX_BUFFER, RX_Channel_State, E_NOT_OK);
+                        break;
+                    }
+
+                    /* Wait again */
+                    case CanTp_RX_Wait_Next_FC_WT: {
+                        RX_Channel_State->Channel_State = CanTp_RX_Transmit_FC_WT;
+                        RX_Channel_State->Timer = CanTp_Get_TX_N_AR(RX_Channel_State->RX_SDU_Handle);
+                        CanTp_Rx_Transmit(RX_Channel_State);
+                        break;
+                    }
+
+                    default:{
+                        /* report to DET */
+                        break;
+                    }
+                }
+            }
+            else {
+                if ((RX_Channel_State->Channel_State == CanTp_RX_Store_SF)
+                 || (RX_Channel_State->Channel_State == CanTp_RX_Store_FF)
+                 || (RX_Channel_State->Channel_State == CanTp_RX_Store_CF)
+                 || (RX_Channel_State->Channel_State == CanTp_RX_Wait_Next_FC_WT)) {
+                    CanTp_RX_Store(RX_Channel_State);
+                }
+
+                if ((RX_Channel_State->Channel_State == CanTp_RX_Transmit_FC_CTS)
+                 || (RX_Channel_State->Channel_State == CanTp_RX_Transmit_FC_WT)
+                 || (RX_Channel_State->Channel_State == CanTp_RX_Transmit_FC_OVFL)) {
+                    CanTp_Rx_Transmit(RX_Channel_State);
+                }
             }
         }
     }

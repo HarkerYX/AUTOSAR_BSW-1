@@ -33,6 +33,11 @@
 
 #define CANTP_E_NO_ERROR            0xFF
 
+#define CANTP_FRAME_SF              0x00
+#define CANTP_FRAME_FF              0x01
+#define CANTP_FRAME_CF              0x02
+#define CANTP_FRAME_FC              0x03
+
 /* AUTOSAR Development Errors
  * SWS_CANTP_00293 */
 #define CANTP_E_PARAM_CONFIG        0x01
@@ -42,6 +47,8 @@
 #define CANTP_E_UNINIT              0x20
 #define CANTP_E_INVALID_TX_ID       0x30
 #define CANTP_E_INVALID_RX_ID       0x40
+#define CANTP_E_INVALID_TX_BUFFER   0x50
+#define CANTP_E_INVALID_RX_BUFFER   0x60
 
 /* AUTOSAR Runtime Errors
  * SWS_CANTP_00352 */
@@ -53,6 +60,9 @@
 #define CANTP_E_TX_COM              0xD0
 
 /* Detail self-defined Errors */
+#define CANTP_E_RX_TIMEOUT_AR       0xC1
+#define CANTP_E_RX_TIMEOUT_BR       0xC2
+#define CANTP_E_RX_TIMEOUT_CR       0xC3
 #define CANTP_E_TX_TIMEOUT_AS       0xD1
 #define CANTP_E_TX_TIMEOUT_BS       0xD2
 #define CANTP_E_TX_TIMEOUT_CS       0xD3
@@ -115,21 +125,35 @@ typedef enum {
 *                                           State Machine definitions                                                  *
 ***********************************************************************************************************************/
 typedef enum {
-    CanTp_Tx_IDLE                = 0x00,
-    CanTp_TX_Transmit_SF         = 0x01,
-    CanTp_TX_Transmit_FF         = 0x02,
-    CanTp_TX_Transmit_CF         = 0x03,
-    CanTp_TX_Wait_Confirm_SF     = 0x04,
-    CanTp_TX_Wait_Confirm_FF     = 0x05,
-    CanTp_TX_Wait_Confirm_CF     = 0x06,
-    CanTp_TX_Prepare_Transmit_SF = 0x07,
-    CanTp_TX_Prepare_Transmit_FF = 0x08,
-    CanTp_TX_Prepare_Transmit_CF = 0x09,
-    CanTp_TX_Wait_STmin          = 0x0A,
-    CanTp_TX_Wait_FC             = 0x0B,
+    CanTp_Tx_IDLE                        = 0x00,
+    CanTp_TX_Transmit_SF                 = 0x01,
+    CanTp_TX_Transmit_FF                 = 0x02,
+    CanTp_TX_Transmit_CF                 = 0x03,
+    CanTp_TX_Wait_Confirm_SF             = 0x04,
+    CanTp_TX_Wait_Confirm_FF             = 0x05,
+    CanTp_TX_Wait_Confirm_CF             = 0x06,
+    CanTp_TX_Prepare_Transmit_SF         = 0x07,
+    CanTp_TX_Prepare_Transmit_FF         = 0x08,
+    CanTp_TX_Prepare_Transmit_CF         = 0x09,
+    CanTp_TX_Wait_STmin                  = 0x0A,
+    CanTp_TX_Wait_FC                     = 0x0B,
 } CanTp_TX_SM;
 
-
+typedef enum {
+    CanTp_RX_IDLE                        = 0x01,
+    CanTp_RX_Transmit_FC                 = 0x02,
+    CanTp_RX_Transmit_FC_CTS             = 0x03,
+    CanTp_RX_Transmit_FC_WT              = 0x04,
+    CanTp_RX_Transmit_FC_OVFL            = 0x05,
+    CanTp_RX_Wait_CF                     = 0x06,
+    CanTp_RX_Wait_Next_FC_WT             = 0x07,
+    CanTp_RX_Wait_Confirm_FC_CTS         = 0x08,
+    CanTp_RX_Wait_Confirm_FC_WT          = 0x09,
+    CanTp_RX_Wait_Confirm_FC_OVFL        = 0x0A
+    CanTp_RX_Store_SF                    = 0x0B,
+    CanTp_RX_Store_FF                    = 0x0C,
+    CanTp_RX_Store_CF                    = 0x0D,
+} CanTp_RX_SM;
 
 /***********************************************************************************************************************
 *                                                  Functions                                                           *

@@ -22,9 +22,10 @@
 /***********************************************************************************************************************
 *                                                    MACRO                                                            *
 ***********************************************************************************************************************/
-#define CANTP_CHANNEL_NUMS 3
-#define CANTP_RX_NSDU_NUMS 2
-#define CANTP_TX_NSDU_NUMS 2
+#define CANTP_TX_CHANNEL_NUMS 3
+#define CANTP_RX_CHANNEL_NUMS 3
+#define CANTP_RX_NSDU_NUMS    2
+#define CANTP_TX_NSDU_NUMS    2
 
 /***********************************************************************************************************************
 *                                               Type definitions                                                       *
@@ -143,7 +144,24 @@ typedef struct {
     uint8                FC_Data[4];
 } CanTp_TX_State_Type;
 
-
+typedef struct {
+    uint8                 Frame_Type;
+    volatile uint16       Timer;
+    volatile CanTp_RX_SM  Channel_State;
+    uint16                Data_Length;
+    uint16                Data_Index;
+    uint16                Buffer_Size;
+    PduIdType             RX_SDU_Handle;
+    volatile uint16       Wait_Timer;
+    BufReq_ReturnType     Buffer_State;
+    uint8                 Payload_Length;
+    uint8                 Payload[7];
+    uint8                 DLC;
+    uint8                 SN;
+} CanTp_RX_State_Type;
 
 extern CanTp_TX_State_Type CanTp_TX_State[3];
+
+extern CanTp_RX_State_Type CanTp_RX_State[3];
+
 #endif //AUTOSAR_LIB_CANTP_PBCONFIG_H
