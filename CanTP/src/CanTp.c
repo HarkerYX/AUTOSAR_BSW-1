@@ -20,6 +20,26 @@ uint8 CanTp_InitState;
 /***********************************************************************************************************************
 *                                               Static Functions                                                        *
 ***********************************************************************************************************************/
+static void CanTp_Rx_Indication_SF(CanTp_RX_State_Type RX_Channel_State, PduInfoType PDU) {
+
+}
+
+static void CanTp_Rx_Indication_FF(CanTp_RX_State_Type RX_Channel_State, PduInfoType PDU) {
+
+}
+
+static void CanTp_Rx_Indication_CF(CanTp_RX_State_Type RX_Channel_State, PduInfoType PDU) {
+
+}
+
+static void CanTp_Rx_Indication_FC(CanTp_RX_State_Type RX_Channel_State, PduInfoType PDU) {
+
+}
+
+static void CanTp_RX_Indication_Handler(PduIdType SDU, uint8 Frame_Type, PduInfoType payload) {
+
+}
+
 static uint16 CanTp_Get_TX_N_CS(PduIdType TX_SDU_ID) {
 
 }
