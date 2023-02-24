@@ -9,8 +9,9 @@ Nice docs, notes and pictures provided.
 
 ### WORKING TARGET NOW
 #### CAN communication stack
-1. CanIf (WORKING)
-2. CanTrcv
+1. CanIf (Pending)
+2. CanTrcv (Pending)
+3. CanTp (Working)
 
 ### HOW TO USE
 1. After implementing the CAN communication stack, I will verify it on a development board.
