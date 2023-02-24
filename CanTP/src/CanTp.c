@@ -350,6 +350,7 @@ void CanTp_TX_MainFunction(void) {
                     case CanTp_TX_Transmit_SF:
                     case CanTp_TX_Transmit_FF:
                     case CanTp_TX_Transmit_CF: {
+                        CanTp_TX_Transmit_Prepare(TX_Channel_State);
                         break;
                     }
                     default : {
@@ -369,7 +370,7 @@ void CanTp_RX_MainFunction(void) {
     if (CanTp_InitState == CANTP_STATE_INITIALIZED) {
         for (channel_Id = 0; channel_Id < CANTP_RX_CHANNEL_NUMS; channel_Id++) {
             *RX_Channel_State = CanTp_RX_State[channel_Id];
-z
+
             RX_Channel_State->Timer--;
             if (RX_Channel_State->Timer == 0) {
                 switch (RX_Channel_State->Channel_State) {
@@ -447,4 +448,8 @@ Std_ReturnType CanTp_Transmit(PduIdType TxPduId, const PduInfoType *PduInfoPtr) 
     }
 
     return return_value;
+}
+
+void CanTp_RxIndication(PduIdType RxPduId, const PduInfoType *PduInfoPtr) {
+
 }

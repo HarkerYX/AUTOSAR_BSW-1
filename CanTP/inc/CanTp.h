@@ -174,13 +174,13 @@ Std_ReturnType CanTp_ChangeParameter(PduIdType id, TPParameterType parameter, ui
 
 Std_ReturnType CanTp_ReadParameter(PduIdType id, TPParameterType parameter, uint16 value);
 
-void CanTp_RxIndication(PduIdType RxPduId, const PduInfoType *PduInfoPtr);
+extern void CanTp_RxIndication(PduIdType RxPduId, const PduInfoType *PduInfoPtr);
 
 void CanTp_TxConfirmation(PduIdType TxPduId);
 
 void CanTp_TX_MainFunction(void);
 
-void CanTp_Rx_MainFunction(void);
+void CanTp_RX_MainFunction(void);
 
 
 #endif //AUTOSAR_LIB_CANTP_H
